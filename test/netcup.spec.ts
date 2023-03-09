@@ -63,8 +63,12 @@ describe("Netcup DNS API", async function () {
     sandbox = sinon.createSandbox();
   });
 
-  after(function () {
+  afterEach(function () {
     sandbox.reset();
+  });
+
+  after(function () {
+    sandbox.restore();
   });
 
   describe("Verify Configuration (init)", function () {
