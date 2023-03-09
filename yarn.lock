@@ -224,15 +224,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/get-port@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "@types/get-port@npm:4.2.0"
-  dependencies:
-    get-port: "*"
-  checksum: 0c084e946089d310b2cfe130b0e4b8c25124800dfba069b756a4477a2e9cb9fabf4f5f59747d987492cbf25b72a24692f6bf1aee1fbfdc47411916221075eba3
-  languageName: node
-  linkType: hard
-
 "@types/http-cache-semantics@npm:^4.0.1":
   version: 4.0.1
   resolution: "@types/http-cache-semantics@npm:4.0.1"
@@ -258,15 +249,6 @@ __metadata:
   version: 10.0.1
   resolution: "@types/mocha@npm:10.0.1"
   checksum: 224ea9fce7b1734ccdb9aa99a622d902a538ce1847bca7fd22c5fb38adcf3ed536f50f48f587085db988a4bb3c2eb68f4b98e1cd6a38bc5547bd3bbbedc54495
-  languageName: node
-  linkType: hard
-
-"@types/nock@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "@types/nock@npm:11.1.0"
-  dependencies:
-    nock: "*"
-  checksum: 7da1724ea2cbcd00730cc41e4880d987b0450823d5246cb1b0665be8db43ea9517bdff2161a1ecba8f23382c1e410b9b46da621614a9ae286568e6a8fd8a0a74
   languageName: node
   linkType: hard
 
@@ -1311,13 +1293,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-port@npm:*":
-  version: 6.1.2
-  resolution: "get-port@npm:6.1.2"
-  checksum: e3c3d591492a11393455ef220f24c812a28f7da56ec3e4a2512d931a1f196d42850b50ac6138349a44622eda6dc3c0ccd8495cd91376d968e2d9e6f6f849e0a9
-  languageName: node
-  linkType: hard
-
 "get-stream@npm:^6.0.1":
   version: 6.0.1
   resolution: "get-stream@npm:6.0.1"
@@ -1822,9 +1797,7 @@ __metadata:
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
     "@types/express": ^4.17.16
-    "@types/get-port": ^4.2.0
     "@types/mocha": ^10.0.1
-    "@types/nock": ^11.1.0
     "@types/node": ^18.11.18
     "@types/sinon": ^10.0.13
     "@types/sinon-chai": ^3.2.9
@@ -2145,7 +2118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nock@npm:*, nock@npm:^13.3.0":
+"nock@npm:^13.3.0":
   version: 13.3.0
   resolution: "nock@npm:13.3.0"
   dependencies:
