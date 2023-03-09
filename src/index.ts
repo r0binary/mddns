@@ -18,3 +18,11 @@ const server = app.listen(port);
 console.info(
   `Server is listening on port ${(server.address() as AddressInfo).port}`
 );
+
+process.on("SIGINT", () => {
+  console.info("Shutting down...");
+  server.close(() => {
+    console.info("Shutdown complete. Exiting now...");
+    process.exit(0);
+  });
+});

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "ts-mocha --reporter progress test/*.spec.ts",
-    "start": "ts-node-esm src/index.ts 8080"
+    "start": "ts-node-esm src/index.ts 8080",
+    "mddns": "node build/src/index.js 8080"
   },
   "bin": "build/src/index.js",
   "files": [

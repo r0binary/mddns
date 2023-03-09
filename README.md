@@ -26,6 +26,16 @@ If you prefer to not install the tool `npm run start [<port>]`.
 If not port was specified, the system will assign an available port
 to the service.
 
+### Build the docker container
+
+To build mddns into a docker container run
+
+`docker build . -t mddns:latest`
+
+To start the app in docker run
+
+`docker run -ti -p 8080:8080 mddns`
+
 ### Send update request
 
 To trigger the updater just make a GET request to the `/update` endpoint.
@@ -52,3 +62,11 @@ ToDo
 [netcup]: https://www.netcup.de
 [bytecamp-updater]: src/updaters/BytecampUpdater.ts
 [netcup-updater]: src/updaters/NetcupUpdater.ts
+
+ToDo:
+
+- move the domain config from request into env
+
+TypeScript + Yarn3
+
+    yarn add --dev @yarnpkg/sdks
