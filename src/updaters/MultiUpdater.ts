@@ -1,11 +1,13 @@
 import { UpdateConfig, Updater } from "./Updater.interface";
 import { NetcupUpdater } from "./NetcupUpdater.js";
+import { IonosUpdater } from "./IonosUpdater.js";
 import { BytecampUpdater } from "./BytecampUpdater.js";
 
 export class MultiUpdater implements Updater {
   public constructor(
     private readonly updaters: Updater[] = [
       new NetcupUpdater(),
+      new IonosUpdater(),
       new BytecampUpdater(),
     ]
   ) {}

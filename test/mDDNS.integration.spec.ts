@@ -7,6 +7,7 @@ import sinonChai from "sinon-chai";
 import request from "supertest";
 import update, { UpdateQuery } from "../src/routes/update/index.js";
 import { mockBytecampUpdate } from "./fixtures/bytecamp.fixture.js";
+import { mockIonosUpdate } from "./fixtures/ionos.fixture.js";
 import { mockNetcupUpdate } from "./fixtures/netcup.fixture.js";
 
 chai.use(sinonChai);
@@ -16,6 +17,7 @@ describe("mDDNS Integration", function () {
   const dummyEnv = {
     BYTECAMP_USER: "dummyUser",
     BYTECAMP_PASS: "dummyPass",
+    IONOS_API_KEY: "apiKey",
     NETCUP_CUSTOMER_NUMBER: "customerNumber",
     NETCUP_API_KEY: "apiKey",
     NETCUP_API_PASSWORD: "validApiPassword",
@@ -35,6 +37,7 @@ describe("mDDNS Integration", function () {
   let consoleInfoStub: sinon.SinonStub;
   let consoleErrorStub: sinon.SinonStub;
   let netcupScope: nock.Scope;
+  let ionosScope: nock.Scope;
   let bytecampScope: nock.Scope;
 
   before(function () {
@@ -47,6 +50,8 @@ describe("mDDNS Integration", function () {
       dummyEnv.BYTECAMP_USER,
       dummyEnv.BYTECAMP_PASS
     );
+
+    ionosScope = mockIonosUpdate(dummyEnv.IONOS_API_KEY);
 
     netcupScope = mockNetcupUpdate(
       {
@@ -67,7 +72,7 @@ describe("mDDNS Integration", function () {
     sandbox.restore();
   });
 
-  it("updates Bytecamp and Netcup", async function () {
+  it("updates all targets", async function () {
     const app = express();
     app.use(bodyParser.json());
     app.get("/update", update);
@@ -77,12 +82,14 @@ describe("mDDNS Integration", function () {
 
     // Assert all expected HTTP requests have been made
     expect(bytecampScope.isDone()).to.be.true;
+    expect(ionosScope.isDone()).to.be.true;
     expect(netcupScope.isDone()).to.be.true;
 
     // Assert the update status was printed
     expect(consoleInfoStub).to.be.calledWithExactly(
       "BytecampUpdater: ✅ success"
     );
+    expect(consoleInfoStub).to.be.calledWithExactly("IonosUpdater: ✅ success");
     expect(consoleInfoStub).to.be.calledWithExactly(
       "NetcupUpdater: ✅ success"
     );

@@ -1,9 +1,9 @@
 # mddns
 
 A multi DDNS updater webservice. It can currently dynamically update DNS records
-for the [Bytecamp][bytecamp] DDNS service and [Netcup][netcup]'s DNS API. Unlike
+for the [Bytecamp][bytecamp] / [IONOS][ionos] DDNS service and [Netcup][netcup]'s DNS API. Unlike
 usual DDNS clients this one is intented to be triggered by an AVM Fritz!Box
-providing the current public IP Addresses.
+providing the current public IP addresses.
 
 ## Features
 
@@ -12,13 +12,14 @@ providing the current public IP Addresses.
 - Available Providers:
   - [Netcup][netcup-updater] _(DNS API)_
   - [Bytecamp][bytecamp-updater] _(DDNS)_
+  - [IONOS Dyn DNS][ionos-updater] _(DDNS)_
 
 ## Usage
 
 ### Installation
 
 To use the tool, install it globally by running
-`npm run build && npm pack && npm install --global mddns-0.1.0.tgz`.
+`npm run build && npm pack && npm install --global mddns-0.2.0.tgz`.
 Once this is done, start the service: `mddns [<port>]`.
 
 If you prefer to not install the tool `npm run start [<port>]`.
@@ -60,8 +61,10 @@ ToDo
 
 [bytecamp]: https://www.bytecamp.net
 [netcup]: https://www.netcup.de
+[ionos]: https://www.ionos.de
 [bytecamp-updater]: src/updaters/BytecampUpdater.ts
 [netcup-updater]: src/updaters/NetcupUpdater.ts
+[ionos-updater]: src/updaters/IonosUpdater.ts
 
 ToDo:
 
