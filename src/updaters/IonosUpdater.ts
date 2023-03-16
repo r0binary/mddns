@@ -30,24 +30,22 @@ export class IonosUpdater implements Updater {
       family: 4,
     };
 
-    await this.callUpdateHook(ipv4Options);
+    await IonosUpdater.callUpdateHook(ipv4Options);
 
     const ipv6Options = {
       ...basicOptions,
       family: 6,
     };
 
-    await this.callUpdateHook(ipv6Options);
+    await IonosUpdater.callUpdateHook(ipv6Options);
   }
 
-  private async callUpdateHook(options: https.RequestOptions): Promise<void> {
+  private static async callUpdateHook(
+    options: https.RequestOptions
+  ): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      const req = https.request(options, (res: http.IncomingMessage) => {
-        if (res.statusCode == 200) {
-          resolve();
-        } else {
-          reject(Error(`Server returned error code ${res.statusCode}`));
-        }
+      const req = https.request(options, (res) => {
+        IonosUpdater.evaluateResult(res, resolve, reject);
       });
 
       req.on("error", (error: Error) => {
@@ -55,6 +53,35 @@ export class IonosUpdater implements Updater {
       });
 
       req.end();
+    });
+  }
+
+  private static evaluateResult(
+    res: http.IncomingMessage,
+    resolve: Function,
+    reject: Function
+  ) {
+    if (res.statusCode == 200) {
+      resolve();
+    } else {
+      IonosUpdater.withCollectedData(res, (data: string) => {
+        reject(Error(`Server returned error code ${res.statusCode}: ${data}`));
+      });
+    }
+  }
+
+  private static withCollectedData(
+    message: http.IncomingMessage,
+    action: (data: string) => void
+  ) {
+    let data = "";
+
+    message.on("data", (chunk: string) => {
+      data += chunk;
+    });
+
+    message.on("end", () => {
+      action(data);
     });
   }
 }

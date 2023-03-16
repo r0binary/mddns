@@ -7,7 +7,7 @@ export function mockIonosUpdate(query: string): nock.Scope {
 }
 
 export function mockFailedIonosUpdate(query: string): nock.Scope {
-  return generateNockQuery(query).reply(500, {});
+  return generateNockQuery(query).reply(500, "Oh boy...");
 }
 
 function generateNockQuery(query: string): nock.Interceptor {

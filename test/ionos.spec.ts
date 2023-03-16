@@ -59,11 +59,10 @@ describe("Ionos Updater", async function () {
     it("rejects on wrong status code", async function () {
       const scope = mockFailedIonosUpdate(dummyApiKey);
 
-      try {
-        await updater.update();
-      } catch (error) {
-        expect(error).to.be.instanceOf(Error);
-      }
+      await expect(updater.update()).to.eventually.be.rejectedWith(
+        Error,
+        "Server returned error code 500: Oh boy..."
+      );
 
       expect(scope.isDone()).to.be.true;
     });
