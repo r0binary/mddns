@@ -11,14 +11,21 @@ import {
 chai.use(sinonChai);
 
 describe("MultiUpdater", function () {
-  const sandbox = sinon.createSandbox();
-  const infoStub = sandbox.stub(console, "info");
-  const errorStub = sandbox.stub(console, "error");
-  const updaters: sinon.SinonStubbedInstance<BytecampUpdater>[] = [
-    sandbox.createStubInstance(BytecampUpdater),
-    sandbox.createStubInstance(BytecampUpdater),
-    sandbox.createStubInstance(BytecampUpdater),
-  ];
+  let sandbox: sinon.SinonSandbox;
+  let infoStub: sinon.SinonStub;
+  let errorStub: sinon.SinonStub;
+  let updaters: sinon.SinonStubbedInstance<BytecampUpdater>[];
+
+  before(function () {
+    sandbox = sinon.createSandbox();
+    infoStub = sandbox.stub(console, "info");
+    errorStub = sandbox.stub(console, "error");
+    updaters = [
+      sandbox.createStubInstance(BytecampUpdater),
+      sandbox.createStubInstance(BytecampUpdater),
+      sandbox.createStubInstance(BytecampUpdater),
+    ];
+  });
 
   afterEach(function () {
     sandbox.reset();
