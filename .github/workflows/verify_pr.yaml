@@ -1,0 +1,17 @@
+name: mddns updater
+
+on: [push, pull_request]
+
+jobs:
+  Run-Tests-Node18:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests on Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
